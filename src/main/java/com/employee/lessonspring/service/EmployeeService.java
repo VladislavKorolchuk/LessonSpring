@@ -30,13 +30,10 @@ public class EmployeeService {
     }
 
     public Employee  getSalaryMin() { /* Получение минимальной зарплаты сотрудника */
-        int salaryMin  = employeeMap.values().stream().mapToInt(Employee::getSalary).min().getAsInt();
-        // return employeeMap.values().stream().filter(e-> e.getSalary()==salaryMin).min(Comparator.comparingInt(Employee::getSalary)).get();
         return employeeMap.values().stream().min(Comparator.comparingInt(Employee::getSalary)).get();
     }
 
     public Employee getSalaryMax() { /* Получение минимальной зарплаты сотрудника */
-        int salaryMax  = employeeMap.values().stream().mapToInt(Employee::getSalary).max().getAsInt();
         return employeeMap.values().stream().max(Comparator.comparingInt(Employee::getSalary)).get();
     }
 
