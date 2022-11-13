@@ -48,6 +48,7 @@ GET http://localhost:8080/employee/salary/min
 ### Получение максимальной зарплаты сотрудника
 GET http://localhost:8080/employee/salary/max
 
+
 ### Получение сотрудников с зарплатой выше средней
 GET http://localhost:8080//employee/salary/aboveaverage
 

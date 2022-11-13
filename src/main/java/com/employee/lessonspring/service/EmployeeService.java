@@ -29,12 +29,14 @@ public class EmployeeService {
         return employeeMap.values().stream().mapToInt(t->t.getSalary()).sum();
     }
 
-    public OptionalInt getSalaryMin() { /* Получение минимальной зарплаты сотрудника */
-        return employeeMap.values().stream().mapToInt(t->t.getSalary()).min();
+    public Employee  getSalaryMin() { /* Получение минимальной зарплаты сотрудника */
+        int salaryMin  = employeeMap.values().stream().mapToInt(Employee::getSalary).min().getAsInt();
+        return employeeMap.values().stream().filter(e-> e.getSalary()==salaryMin).min(Comparator.comparingInt(Employee::getSalary)).get();
     }
 
-    public OptionalInt getSalaryMax() { /* Получение минимальной зарплаты сотрудника */
-        return employeeMap.values().stream().mapToInt(t->t.getSalary()).max();
+    public Employee getSalaryMax() { /* Получение минимальной зарплаты сотрудника */
+        int salaryMax  = employeeMap.values().stream().mapToInt(Employee::getSalary).max().getAsInt();
+        return employeeMap.values().stream().filter(e-> e.getSalary()==salaryMax).max(Comparator.comparingInt(Employee::getSalary)).get();
     }
 
     public int getSalaryAverage() { /* Получение средней зарплаты сотрудника */
@@ -42,6 +44,7 @@ public class EmployeeService {
     }
 
     public Set<Employee> getEmployeeSalaryHigherAverage() { /* Получение сотрудников с зарплатой выше средней */
+        int SalaryAverage= getSalaryAverage();
         return employeeMap.values().stream().filter(e->e.getSalary()>getSalaryAverage()).collect(Collectors.toSet());
     }
 

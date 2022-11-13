@@ -8,10 +8,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import java.util.Collection;
-import java.util.Map;
-import java.util.OptionalInt;
-import java.util.Set;
+import java.util.*;
 
 /* Методы .maping:
  * GET - получение ресурса
@@ -42,14 +39,15 @@ public class EmployeeController {
     int getSalarySum() {
         return this.employeeService.getSalarySum();
     }
+
     @GetMapping("/employee/salary/min") /* Получение минимальной зарплаты сотрудника */
-    OptionalInt getSalaryMin() {
-        return this.employeeService.getSalaryMin();
+    int getSalaryMin() {
+        return this.employeeService.getSalaryMin().getSalary();
     }
 
     @GetMapping("/employee/salary/max") /* Получение максимальной зарплаты сотрудника */
-    OptionalInt getSalaryMax() {
-        return this.employeeService.getSalaryMax();
+    int getSalaryMax() {
+        return this.employeeService.getSalaryMax().getSalary();
     }
 
     @GetMapping("/employee/salary/aboveaverage")  /* Получение сотрудников с зарплатой выше средней */
