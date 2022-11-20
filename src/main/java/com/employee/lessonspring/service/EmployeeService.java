@@ -3,9 +3,9 @@ package com.employee.lessonspring.service;
 import com.employee.lessonspring.model.Employee;
 import com.employee.lessonspring.record.EmployeeRequest;
 import org.springframework.stereotype.Service;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.Map;
+
+import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class EmployeeService {
@@ -25,7 +25,25 @@ public class EmployeeService {
         return employee;
     }
 
-    public int getSalarySum() {
+    public int getSalarySum() { /* Получение суммы зарплат сотрудников */
         return employeeMap.values().stream().mapToInt(t->t.getSalary()).sum();
     }
+
+    public Employee  getSalaryMin() { /* Получение минимальной зарплаты сотрудника */
+        return employeeMap.values().stream().min(Comparator.comparingInt(Employee::getSalary)).get();
+    }
+
+    public Employee getSalaryMax() { /* Получение минимальной зарплаты сотрудника */
+        return employeeMap.values().stream().max(Comparator.comparingInt(Employee::getSalary)).get();
+    }
+
+    public int getSalaryAverage() { /* Получение средней зарплаты сотрудника */
+        return getSalarySum() / employeeMap.size();
+    }
+
+    public Set<Employee> getEmployeeSalaryHigherAverage() { /* Получение сотрудников с зарплатой выше средней */
+        int SalaryAverage= getSalaryAverage();
+        return employeeMap.values().stream().filter(e->e.getSalary()>getSalaryAverage()).collect(Collectors.toSet());
+    }
+
 }
